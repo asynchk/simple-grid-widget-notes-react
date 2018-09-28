@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Segment, Icon } from 'semantic-ui-react';
 
-
 import './App.css';
-import { getAllNote, addNewNote, saveLayout } from './util/localStorage';
+import { getAllNote, addNewNote, saveLayout, deleteNote } from './util/localStorage';
 
 import InputField from './components/TextArea/TextArea.Component';
 import ButtonGroup from './components/ButtonGroup/ButtonGroup.Component';
 
 import Grid from './components/GridLayout/index';
 
+import styled from 'styled-components';
 
 class App extends Component {
   constructor() {
@@ -27,7 +27,7 @@ class App extends Component {
 
   initialiseData = () => {
     const { allNotes, gridLayout } = getAllNote();
-    console.log("initialiseData", { allNotes, gridLayout } );
+    console.log('initialiseData', { allNotes, gridLayout });
     this.setState({
       notes: allNotes,
       gridLayout,
@@ -63,8 +63,12 @@ class App extends Component {
   }
 
   onLayoutChange = (layout) => {
-    console.log("onLayoutChange")
+    console.log('onLayoutChange', layout);
     saveLayout(layout);
+  }
+  onClickDelete = (id) => {
+    deleteNote(id)
+    this.initialiseData();
   }
 
   componentDidMount() {
@@ -76,17 +80,14 @@ class App extends Component {
       notesContent, notes, gridLayout, inputMode,
     } = this.state;
     return (
-      <div className="App">
+      <div className="App" >
         <header className="App-header">
           <h1 className="App-title">Simple Grid Widget Notes</h1>
           <Icon className="App-logo" name="table" size="big" />
         </header>
+        <BodyWrapper>
         <p className="App-intro">
-          To get started, Press
-          {' '}
-          <code>Add A New Note</code>
-          {' '}
-          and type something.
+          To get started, Press <code>Add A New Note</code> and type something.
         </p>
         <ButtonGroup
           inputMode={inputMode}
@@ -94,6 +95,7 @@ class App extends Component {
           onSubmit={this.onSubmit}
           onReset={this.onReset}
         />
+          <ContentWrapper>
         {
               inputMode
           && (
@@ -107,10 +109,28 @@ class App extends Component {
           </Segment.Group>
           )
             }
-        <Grid notes={notes} gridLayout={gridLayout} onLayoutChange={this.onLayoutChange} />
-      </div>
+          </ContentWrapper>
+        <Grid
+        notes={notes}
+        gridLayout={gridLayout}
+        onLayoutChange={this.onLayoutChange}
+        onClickDelete={this.onClickDelete}
+        />
+        </BodyWrapper>
+        </div>
     );
   }
 }
 
 export default App;
+
+const ContentWrapper = styled.div`
+width: 800px;
+`
+
+const BodyWrapper = styled.div`
+align-content: center;
+align-items: center;
+display: flex;
+flex-direction: column;
+`

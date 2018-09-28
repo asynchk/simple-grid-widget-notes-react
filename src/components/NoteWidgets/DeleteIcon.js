@@ -2,21 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
 
+import { PropTypes } from 'prop-types';
 import NoteWidgetContainer from './NoteWidgetContainer';
 
-const DragIcon = () => (
-  <StyledDragIcon
-    name="expand arrows alternate"
-    className="dragging-handle"
-    // color="white"
-    size="small"
+const DeleteIcon = ({ onClick }) => (
+  <StyledDeleteIcon
+    onClick={onClick}
+    name="delete"
   />
 );
 
+DeleteIcon.propTypes = {
+  onClick: PropTypes.func,
+};
 
-const StyledDragIcon = styled(Icon)`
+const StyledDeleteIcon = styled(Icon)`
 &&& {
-    color: white;
+    z-index: 10;
+    color: #333;
     position: absolute;
     top: 6px;
     right: 4px;
@@ -29,21 +32,9 @@ const StyledDragIcon = styled(Icon)`
     transition: opacity 0.3s;
     transition-timing-function: linear;
     ${NoteWidgetContainer}:hover & {
-        color: #333;
         opacity: 1;
-        // display: inline-block!important;
     }
 }
 `;
 
-
-// stroke: #fff!important;
-// position: abs
-
-// top: 5px;
-// right: 5px;
-// display: none;
-// /* display: block; */
-// height: 16px;
-
-export default DragIcon;
+export default DeleteIcon;

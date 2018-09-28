@@ -1,51 +1,62 @@
 import React from 'react';
 import styled from 'styled-components';
-// import DragIcon from '../Widget/CommonWidget/CommonWidgetComponents/WidgetDragIcon';
-
 import PropTypes from 'prop-types';
-
 import NoteWidgetContainer from './NoteWidgetContainer';
+import DeleteIcon from './DeleteIcon';
 
 class NoteWidget extends React.PureComponent {
+  onClickDelete = (event) => {
+    console.log('onClickDelete');
+    typeof this.props.onClickDelete === 'function' && this.props.onClickDelete(this.props.id);
+  }
+
   render() {
     const {
+      id,
       title,
       value,
-      background,
-      isDraggable,
+      onClickDelete,
     } = this.props;
     return (
-      <NoteWidgetContainer background={background} className="dragging-handle">
+      <NoteWidgetContainer className="dragging-handle">
         <WidgetTitle>
           {title}
         </WidgetTitle>
         <NoteWidgetContentText>
           {value}
         </NoteWidgetContentText>
-        {/* { isDraggable && <DragIcon />} */}
+        <DeleteIcon onClick={this.onClickDelete} />
       </NoteWidgetContainer>
     );
   }
 }
+NoteWidget.propTypes = {
+  title: PropTypes.string,
+  value: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  onClickDelete: PropTypes.func,
+};
+
 NoteWidget.defaultProps = {
-       title: 'Untitled',
-      value: 'Empty Notes',
-      background: '#ddd',
-      isDraggable: false,
-}
+  title: 'Untitled',
+  value: 'Empty Notes',
+};
+
 const WidgetTitle = styled.div`
     font-weight: 600;
     max-weight: 100%;
-    font-size: 19px;
+    font-size: 24px;
     `;
 const NoteWidgetContentText = styled.div`
-z-index: 10;
+  z-index: 10;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-    font-weight: 600;
+  justify-content: flex-start;
+    font-weight: 400;
     max-weight: 100%;
-    font-size: 24px;
+    font-size: 20px;
+    line-height: 1.2;
 `;
+
 
 export default NoteWidget;

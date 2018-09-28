@@ -2,15 +2,18 @@ import React from 'react';
 import { Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const ButtonGroup = ({ inputMode, onToggleInputMode, onReset, onSubmit }) => (
+const ButtonGroup = ({
+  inputMode, onToggleInputMode, onReset, onSubmit,
+}) => (
   <div>
     <Button
       content="Add New Note"
       icon="add"
       onClick={onToggleInputMode}
     />
- {
-  inputMode&&
+    {
+  inputMode
+  && (
   <Button.Group>
     <Button
       content="Reset"
@@ -19,18 +22,24 @@ const ButtonGroup = ({ inputMode, onToggleInputMode, onReset, onSubmit }) => (
     />
     <Button
       content="Submit"
-      icon="angle double right"
+      icon="write"
       onClick={onSubmit}
     />
   </Button.Group>
+  )
 
  }
- </div>
+  </div>
 );
 
 ButtonGroup.propTypes = {
+  inputMode: PropTypes.bool,
   onReset: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onToggleInputMode: PropTypes.func.isRequired,
+};
+ButtonGroup.defaultProps = {
+  inputMode: false,
 };
 
 export default ButtonGroup;
