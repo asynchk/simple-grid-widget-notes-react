@@ -1,0 +1,38 @@
+{
+    "env" :{
+        "production":{
+            "plugins": [
+                [
+                    "transform-remove-console",
+                    {
+                        "exclude": [
+                            "error",
+                            "warn"
+                        ]
+                    }
+                ]
+            ]
+        }
+    },
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        ["transform-class-properties"],
+        ["@babel/plugin-transform-runtime"],
+        [
+            "module-resolver",
+            {
+                "root": [
+                    "./src"
+                ],
+                "alias": {
+                    "test": "./test",
+                    "underscore": "lodash",
+                    "public": "./public"
+                }
+            }
+        ]
+    ]
+}
