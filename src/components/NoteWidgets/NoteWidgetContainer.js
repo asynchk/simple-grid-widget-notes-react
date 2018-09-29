@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const NoteWidgetContainer = styled.div`
-    background-color: #ddd;
+    background-color: #fbbd08d9;
     width: 100%;
     height:100%;
     border-radius: 2px;

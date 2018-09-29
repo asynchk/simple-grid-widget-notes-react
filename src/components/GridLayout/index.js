@@ -13,8 +13,9 @@ class Grid extends React.Component {
     // layout is an array of objects, see the demo for more complete usage
     return (
       <div style={{
-        display: 'block',
+        display: 'flex',
         width: 1200,
+        // minWidth: 800,
       }}>
       <GridLayout
         className="layout"

@@ -39,8 +39,8 @@ export const getAllNote = () => {
 export const deleteNote = (id) => {
   const { allNotes, gridLayout, } = getAllNote();
   console.log({ allNotes, gridLayout, id} )
-  delete allNotes[id]
+  const { [id]:skipped, ...filteredNotes} = allNotes;
   const filterGridLayout = gridLayout.filter(layout => layout.i !== id)
-  localStorage.setItem('@grid-widget-notes:notes', JSON.stringify(allNotes));
+  localStorage.setItem('@grid-widget-notes:notes', JSON.stringify(filteredNotes));
   localStorage.setItem('@grid-widget-notes:gridLayout', JSON.stringify(filterGridLayout));
 }

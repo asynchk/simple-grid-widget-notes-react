@@ -24,6 +24,7 @@ const ButtonGroup = ({
       content="Submit"
       icon="write"
       onClick={onSubmit}
+      color="yellow"
     />
   </Button.Group>
   )

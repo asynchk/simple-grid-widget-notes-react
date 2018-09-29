@@ -46,6 +46,7 @@ class App extends Component {
     const noteTitle = document.querySelector('#noteTitle').value;
     const noteContent = document.querySelector('#noteContent').value;
     // console.log({ noteTitle, noteContent });
+    if (noteTitle || noteContent ) {
     try {
       addNewNote({
         noteTitle, noteContent,
@@ -54,6 +55,7 @@ class App extends Component {
       console.log(e.message);
     }
     this.initialiseData();
+  }
   }
 
   toggleInputMode = () => {
