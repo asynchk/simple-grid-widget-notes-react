@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { Segment, Icon } from 'semantic-ui-react';
 
-import './App.css';
 import { getAllNote, addNewNote, saveLayout, deleteNote } from './util/localStorage';
-
-import InputField from './components/TextArea/TextArea.Component';
-import ButtonGroup from './components/ButtonGroup/ButtonGroup.Component';
-
-import Grid from './components/GridLayout/index';
-
-import styled from 'styled-components';
-
+import Home from './components/Pages/Home';
+import './App.css';
 class App extends Component {
   constructor() {
     super();
     this.state = {
       inputMode: false,
-      notes: {
-      },
+      notes: {},
       gridLayout: [],
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -82,57 +72,19 @@ class App extends Component {
       notesContent, notes, gridLayout, inputMode,
     } = this.state;
     return (
-      <div className="App" >
-        <header className="App-header">
-          <h1 className="App-title">Simple Grid Widget Notes</h1>
-          <Icon className="App-logo" name="table" size="big" />
-        </header>
-        <BodyWrapper>
-        <p className="App-intro">
-          To get started, Press <code>Add A New Note</code> and type something.
-        </p>
-        <ButtonGroup
-          inputMode={inputMode}
-          onToggleInputMode={this.toggleInputMode}
-          onSubmit={this.onSubmit}
-          onReset={this.onReset}
-        />
-          <ContentWrapper>
-        {
-              inputMode
-          && (
-          <Segment.Group horizontal>
-            <Segment>
-              <InputField id="noteTitle" title="Title" />
-            </Segment>
-            <Segment>
-              <InputField id="noteContent" title="Note Content" />
-            </Segment>
-          </Segment.Group>
-          )
-            }
-          </ContentWrapper>
-        <Grid
-        notes={notes}
-        gridLayout={gridLayout}
-        onLayoutChange={this.onLayoutChange}
-        onClickDelete={this.onClickDelete}
-        />
-        </BodyWrapper>
-        </div>
+      <Home
+      inputMode={inputMode}
+      toggleInputMode={this.toggleInputMode}
+      notes={notes}
+      gridLayout={gridLayout}
+      onSubmit={this.onSubmit}
+      onReset={this.onSubmit}
+      onLayoutChange={this.onLayoutChange}
+      onClickDelete={this.onClickDelete}
+      />
     );
   }
 }
 
 export default App;
 
-const ContentWrapper = styled.div`
-width: 800px;
-`
-
-const BodyWrapper = styled.div`
-align-content: center;
-align-items: center;
-display: flex;
-flex-direction: column;
-`
