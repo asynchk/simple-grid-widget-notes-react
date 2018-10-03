@@ -1,5 +1,6 @@
 import React from 'react';
 import { Segment } from 'semantic-ui-react';
+import { PropTypes } from 'prop-types';
 
 import styled from 'styled-components';
 
@@ -7,6 +8,9 @@ import Header from '../Header';
 import InputField from '../TextArea/TextArea.Component';
 import ButtonGroup from '../ButtonGroup/ButtonGroup.Component';
 import Grid from '../GridLayout/index';
+
+
+
 
 class Home extends React.PureComponent {
   render() {
@@ -65,6 +69,18 @@ and type something.
 }
 
 export default Home;
+
+
+Home.propTypes = {
+  inputMode: PropTypes.bool.isRequired,
+  toggleInputMode: PropTypes.func.isRequired,
+  notes: PropTypes.object.isRequired,
+  gridLayout: PropTypes.array.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
+  onLayoutChange: PropTypes.func.isRequired,
+  onClickDelete: PropTypes.func.isRequired,
+};
 
 const ContentWrapper = styled.div`
 width: 800px;
