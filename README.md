@@ -30,24 +30,24 @@ After analysis of the user requirement, some open sources libraries are identifi
 ## Functionality
 After component analysis, the requirement is consolidated and listed detailed as below:
 
-The nuber in () refers to the functions to be created.
+The number refers to the functions to be created.
 
-### 1. On Loading Page
+### On Loading Page (1)
 Get all notes stored in the LocalStorage and Update the notes content and the widget grid layout in the current states.
 The initial input form is hidden, and an “Add New Note" button and the Note Widget Grid is shown. Note Widgets are displayed in the grid if there are any.
 
-### 2. Writing a Note
+### Writing a Note (2)
 * Add New Note Button:
-    * 2.1 The Input fields is toggled displayed with a click of the “Add New Note" button. After that, an additional “Reset" and “Submit" button are displayed.
+    * **(2.1)** The Input fields is toggled displayed with a click of the “Add New Note" button. After that, an additional “Reset" and “Submit" button are displayed.
     * On pressing the Add New Note content once more, the input form is toggled hidden. The actions are repeatable that the Input form is toggle on and off by the button.
 * Input Form
     * The “Title" and “Note Content" input field is shown and enable users to input a string literals. The inputs boxes are multiple lines of text fields with no number of lines limit. 
 * Reset and Submit Button
-    * 2.2 Reset button clears the content of the Input Form
+    * **(2.2)** Reset button clears the content of the Input Form
     * Submit Button trigger the submission of a note, of which the functionality will be explained in the next part.
 
     
-### 3. Submission of A Note
+### Submission of A Note (3)
 * On pressing the “Submit" button, the note content is appended and save into the Local Storage. The notes widget content is retrieved again from the local storage, and the current states are updated and trigger the rendering of updated note content in the Note Widget Grid.
 
 ### Note Widget
@@ -55,19 +55,19 @@ A single note widget displays the note title and notes content. It also consists
 
 ### Display of Note Content in Note Widget Grid
 Note Widget Grid is a fixed width container.
-The grid has a fixed number of columns of 6 columns in a grid of 1200 px. Each column has a width of  200px. Each row has a height of 80px. There is a fixed padding space between each widget.
+The grid has a fixed number of columns of 6 columns in a grid of 1200 px. Each column has a width of 200px. Each row has a height of 80px. There is a fixed padding space between each widget.
 
 The notes content is displayed in the Widget Grid according to the coordinates and sized specified and stored in the application states.
 
 The note widgets are aligned at the top of the Widget Grid. In other words, there is an upward gravity in the grid, if there are no other widgets on top of a widget, the widget will be pushed at the top of the grid layout.
 
-### 4. Interaction with Note Widget Grid
+### 4. Interaction with Note Widget Grid (4)
 * Dragging and Relocation
     * on Pressing and dragging the displayed area of a Note Widget, the widget can be moved and placed within the grid. The new layout of all widgets will be saved immediately in the LocalStorage and the application states are updated accordingly.
 * Resizing
     * On Pressing and dragging the **Drag Icon**, the widget will be resized according to the defined grid layout.  The new sizings of all widgets will be saved immediately in the LocalStorage and the application states are updated accordingly.
 
-###  5. Deletion of A Note
+###  Deletion of A Note (5)
 On pressing the **Delete Icon**,  the note content and layout will be deleted from the LocalStorage and at the same time the application states will be updated, the widget grid will display the updated layout and content.
 
 
@@ -83,12 +83,12 @@ With the aids of the React UI frameworkds and the React Lifecycles functions, th
 ## Functions
 To fulfill the requirements as described above, The following functions will be declared at the App.js:
 
-* 1. initialiseData
-* 2.1  toggleInputMode
-* 2.2 onReset
-* 3. onSubmit
-* 4. onLayoutChange
-* 5. onClickDelete
+* (1) initialiseData
+* (2.1)  toggleInputMode
+* (2.2) onReset
+* (3) onSubmit
+* (4) onLayoutChange
+* (5) onClickDelete
 
 The notes and gridLayout are stored in the local states in App.js and browser's LocalStorage provided by HTML5.
 
@@ -97,12 +97,16 @@ The application are developed into different decouple comonents. Parameters are 
 
 ### Button Group
 Input mode off
+<br>
 ![Button group](https://s3-ap-southeast-1.amazonaws.com/grid-widget-notes/images/button_group_1.png)
+<br>
 Input mode on
+<br>
 ![Button group](https://s3-ap-southeast-1.amazonaws.com/grid-widget-notes/images/button_group.png)
+<br>
 
 | Property | Props Type | Required | Default Value  | description |
-| ------------- |:-------------:| -----:| -------: | ---: |
+| ------------- |:-------------:| :-----:| :-------: | --- |
 | inputMode |	bool	| -	 | false	| is toggled on and off to display the Input fields and Reset/Submit Buttons|
 | onReset	| func	| yes | 	-	| passed from App.js|
 | onSubmit | func	| yes	| -	 | passed from App.js |
@@ -113,7 +117,7 @@ Input mode on
 ![Input field](https://s3-ap-southeast-1.amazonaws.com/grid-widget-notes/images/input_field.png)
 
 | Property | Props Type | Required | Default Value  | description |
-| ------------- |:-------------:| -----:| -------: | ---: |
+| ------------- |:-------------:| :-----:| :-------: | --- |
 | id      | string | - | - | |
 | title      | string | - | - | |
 | placeholder | string | - | "Try adding some content" | |
@@ -123,7 +127,7 @@ Input mode on
 
 
 | Property | Props Type | Required | Default Value  | description |
-| ------------- |:-------------:| -----:| -------: | ---: |
+| ------------- |:-------------:| :-----:| :-------: | --- |
 |title	|string	| -	| 'Untitled'	|
 |value	| string	| -	|'Empty Notes'	|
 |id | number |	yes	 | -	|
@@ -132,7 +136,7 @@ Input mode on
 ### Grid Layout
 
 | Property | Props Type | Required | Default Value  | description |
-| ------------- |:-------------:| -----:| -------: | ---: |
+| ------------- |:-------------:| :-----:| :-------: | --- |
 | notes	| object	| - |	{}	|
 | gridLayout	| array |	- |	[]	|
 | onLayoutChange	| function |	-	| -	 |
@@ -145,7 +149,7 @@ Input mode on
 ![home page](https://s3-ap-southeast-1.amazonaws.com/grid-widget-notes/images/home_page.png)
 
 | Property | Props Type | Required | Default Value  | description |
-| ------------- |:-------------:| -----:| -------: | ---: |
+| ------------- |:-------------:| :-----:| :-------: | --- |
 |inputMode|	bool|	yes|	-	|
 |toggleInputMode	| function |	yes	|-	|
 |notes|	object|	yes|	-|	
